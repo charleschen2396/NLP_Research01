@@ -1,0 +1,46 @@
+import os.path
+from pdfminer.pdfparser import PDFParser,PDFDocument
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import PDFPageAggregator
+from pdfminer.layout import LTTextBoxHorizontal,LAParams
+from pdfminer.pdfinterp import PDFTextExtractionNotAllowed
+class CPdf2TxtManager():
+  '''''
+  classdocs
+  '''
+  def __init__(self):
+    '''''
+    Constructor
+    '''
+  def changePdfToText(self, filePath):
+    file = open(path, 'rb')
+    praser = PDFParser(file)
+    doc = PDFDocument()
+    praser.set_document(doc)
+    doc.set_parser(praser)
+    doc.initialize()
+    if not doc.is_extractable:
+      raise PDFTextExtractionNotAllowed
+    rsrcmgr = PDFResourceManager()
+    laparams = LAParams()
+    device = PDFPageAggregator(rsrcmgr, laparams=laparams)
+    interpreter = PDFPageInterpreter(rsrcmgr, device)
+    pdfStr = ''
+    for page in doc.get_pages():
+      interpreter.process_page(page)
+      layout = device.get_result()
+      for x in layout:
+        if (isinstance(x, LTTextBoxHorizontal)):
+          pdfStr = pdfStr + x.get_text() + '\n'
+    fileNames = os.path.splitext(filePath)
+    file2 = open(fileNames[0] + '.txt','wb')
+    file2.write(pdfStr.encode())
+    file2.close()
+    file.close()
+if __name__ == '__main__':
+  '''''
+   解析pdf 文本，保存到txt文件中0
+  '''
+  path = r'C:\002\pdf\LProcessing.pdf'
+  pdf2TxtManager = CPdf2TxtManager()
+  pdf2TxtManager.changePdfToText(path)
