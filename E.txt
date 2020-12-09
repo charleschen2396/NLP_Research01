@@ -1,0 +1,1688 @@
+Emotion Recognition from Blog Articles 
+
+Ji LI 
+Dept. of Information Science and Intelligent System 
+Faculty of Engineering 
+The University of Tokushima 
+Tokushima, 770-8506, Japan 
+liji@is.tokushima-u.ac.jp 
+
+Fuji REN 
+Dept. of Information Science and Intelligent System 
+Faculty of Engineering 
+The University of Tokushima 
+Tokushima, 770-8506, Japan 
+ren@is.tokushima-u.ac.jp
+
+Abstract: 
+
+In recent years, suicide of college students has been a 
+universal phenomenon in the world. And the phenomenon 
+has become more and more sever because of the complex 
+and drastic competitions. With the popularization of 
+internet and the development of information processing 
+technologies, a lot of people have established their own 
+blog websites to write down their experiences and express 
+their feelings at times. It will be very helpful if the 
+computer can recognize the emotions expressed in blog 
+pages automatically. And then it will be convenient for 
+teachers or psychological consultants to monitor the 
+affective 
+information of college students and 
+take 
+measures for the depression prevention when necessary. 
+Owing to the advances in Affective Computing and 
+Natural Language Processing, researches have begun to 
+pay more attention to the emotion recognition in NLP all 
+over the world. This paper outlines the approach we have 
+developed to construct a Blog Emotion-Recognizing 
+System. It is based on the lexical contents of words and 
+structural characteristics of blog articles. For the emotion 
+computing of articles, two methods are proposed and the 
+experimental results are compared and analyzed. Finally, 
+the implications of the results are discussed for the 
+future’s direction of the research. 
+
+Keywords: 
+
+Suicide; depression; blog; affective computing; natural 
+language processing; emotion classification; structural 
+characteristics; emotion recognition 
+
+1. 
+
+Introduction 
+
+In recent years, suicide of college students has 
+been a universal phenomenon all over the world. 
+Furthermore, the number of college students who 
+suicide themselves has been increasing with amazing 
+speed in a worldwide scope, around 100 million persons 
+every year. In 
+the year of 2003, World Health 
+Organization (WHO) appointed September 10th as 
+“World Suicide Prevention Day (WSPD)” to give a 
+caution to the society. And it has adopted many suicide 
+
+978-1-4244-2780-2/08/$25.00 ©2008 IEEE 
+
+prevention programs and projects to avoid unnecessary 
+death. At the same time, the problem of mental health 
+among college students has raised great attention from 
+more and more psychologists, educators and people in 
+all the other professions.  
+In order to intervene in the crisis, psychological 
+consultation centers have been set up almost in every 
+university or college [1]. However, some college 
+students are afraid 
+to 
+talk about 
+their private 
+experiences with other people face to face, and refuse to 
+consult psychological consultants when they meet 
+troubles. 
+In late decades, the popularization of internet and 
+the development of information processing technologies 
+have greatly changed the communication ways of 
+mankind. More and more people have established their 
+own blog websites over the internet where they write 
+down their experiences, put forward their opinions, and 
+express their feelings at times. While some people feel 
+embarrassed to confide their troubles to others face to 
+face, they may feel free to express their emotions in 
+blogs without any pressures. 
+It can be anticipated that in the near future, almost 
+everyone in the world especially every college student 
+will possess his or her own blog website. At that time, it 
+will be very helpful if the computer can recognize the 
+emotions expressed in blog articles automatically. In 
+this case, a Blog Emotion-Recognizing System is 
+needed. If the system detects that some college student 
+has been in a blue mood for continuous days (for 
+example, for continuous seven days), it is recommended 
+that the teacher should pay more attention lately and 
+have a talk with him or her regularly so that the 
+depression can be treated in time. That’s why this 
+research has been taken on. 
+In this paper, we outline a new approach to 
+recognize the author ’s emotion from his or her blog 
+articles. Based 
+on 
+the 
+approach, 
+a Blog 
+Emotion-Recognizing System has been constructed. 
+The results of our experiments on blogs prove the 
+feasibility and effectivity of the means. The remaining 
+part of the paper is organized as follows: 
+Section 2 talks about present status in the fields of 
+
+Authorized licensed use limited to: Saint Cloud State University. Downloaded on October 14,2020 at 14:58:31 UTC from IEEE Xplore.  Restrictions apply. 
+
+Affective Computing and Natural Language Processing. 
+Section 3 describes the classification of emotion 
+for vocabularies in the emotion dictionary. 
+Section 4 illustrates the model of the Blog 
+Emotion-Recognizing System in detail. 
+Section 5 analyzes the structural characteristics of 
+blog articles. 
+Section 6 proposes two methods for emotion 
+computing. 
+Section 7 gives an evaluation and discussion on the 
+experimental results of testing. 
+Section 8 comes to a conclusion of the work done 
+with some directions for future work. 
+
+2. Affective computing and natural language 
+processing 
+
+With the progress in human-computer interface 
+technology 
+and 
+the 
+involvement of 
+computer 
+applications in our daily life, it becomes more and more 
+important that human can communicate with computer 
+in a natural way. Recognizing human's emotional states 
+can be very helpful to smooth the interaction between 
+human and computer. One of the famous researchers, 
+Picard brought forward the concept of “affective 
+computing”[2] at first. After that, machine emotional 
+intelligence has drawn great attention from scientists 
+and researchers not only in the area of artificial 
+intelligence, but also in psychology and others [3]. They 
+have devoted 
+to 
+extracting human’s 
+affective 
+information in many ways such as text, voice, facial 
+expressions, gestures and even some psychological 
+phenomena like galvanic skin response, temperature, 
+heart rate, perspiration rate and etc [4] [5].  
+At the same time, recent technological advances 
+have allowed 
+to develop better applications of 
+human-computer interface to assess human’s emotional 
+states [6] [7]. One of the representative applications is 
+the 
+emotion-recognizing 
+system 
+used 
+in 
+a 
+teleconference, which provides real-time information on 
+the emotional states of 
+the participants. Another 
+example is an automatic tutoring application. It can 
+automatically adjust the content and the speed of the 
+tutorial depending on whether the learner feels bored or 
+excited. 
+Among all the communication mediums (like text, 
+voice, facial expressions, and gestures), we should not 
+forget that language and text play a very basic and 
+important role in expressing our emotions during daily 
+communications, and textual information is easily 
+accessed in pervasive electronic documents like emails, 
+web pages, electronic newspaper and so on. With the 
+help 
+of Natural Language Processing 
+(NLP) 
+technologies, emotional states under the text can be 
+assessed. And in turn, the emotion recognition in text 
+will enhance 
+the emotion 
+sensing 
+from other 
+
+communication mediums.  
+Owing to the popularization of Internet and the 
+development of studies on affective computing, 
+researches have begun to pay more attention to the 
+emotion recognition in NLP especially in America and 
+Japan[8] [9] [10]. In these years, Chinese NLP has also 
+become one of the most attractive focuses in the field of 
+artificial 
+intelligence 
+[11] 
+[12]. 
+In our Blog 
+Emotion-Recognizing System, the NLP technologies 
+are certainly of great use for the emotion recognition 
+from blog articles. 
+
+3. Emotion classification for words 
+
+It is not a trivial task to extract emotional 
+information from the lexical content or meaning of the 
+words in a blog. The fundamental component of the 
+Blog Emotion-Recognizing System is the emotional 
+dictionary through which the emotional category of a 
+vocabulary can be 
+looked up. And 
+the emotion 
+classification has a direct influence on the efficiency 
+and accuracy of the emotion sensing. However, there is 
+no standard 
+for 
+the classification of emotions. 
+Researchers grouped affective words into categories 
+defined by their own for specific study or use.  
+In the past, emotion has been simply divided into 
+two categories “pleasure” and ”displeasure” which are 
+too ambiguous to assess rich emotions of human. 
+Ekman has defined 7 universal affective categories [13] 
+based on unique facial expressions which seem still less 
+while applied into a practical system. In contemporary 
+Chinese, 39 emotional categories are specified for 
+vocabulary [14], nevertheless part of which is seldom 
+used in daily communications.  
+
+Emotional 
+category 
+
+vocabulary 
+
+Table 1. Emotion vocabularies 
+
+Happy 
+
+Sad 
+
+Fearful 
+
+Disgusted 
+
+快乐 
+哀愁 
+恐慌 
+嫌弃 
+幸福 
+痛心 
+胆怯 
+粗俗 
+舒坦 
+绝望 
+恐怖 
+反感 
+成功 
+疼痛 
+害怕 
+顽固 
+扬眉吐气 心如刀割 心惊胆战 味同嚼蜡 
+
+…… 
+
+…… 
+
+…… 
+
+…… 
+
+In our Blog Emotion-Recognizing System, we 
+classified emotion based on the affective categories 
+defined by Ekman plus some important categories 
+found in blogs with high frequency of use. They are 
+totally 26 categories: happy, sad, fearful, disgusted, 
+angry, surprised, love, expectant, nervous, regretful, 
+praiseful, shy, respectful, proud, impatient, doubtful, 
+hateful, grievance, critical, depressed, exited, thankful, 
+annoyed, scornful, haughty, envious. When there is no 
+emotion expressed in a blog, we named the mental state 
+
+Authorized licensed use limited to: Saint Cloud State University. Downloaded on October 14,2020 at 14:58:31 UTC from IEEE Xplore.  Restrictions apply. 
+
+as “neutral”. Some examples of emotional vocabularies 
+are listed in Table 1. 
+
+4. Model of blog emotion-recognizing system 
+
+The Blog Emotion-Recognizing System 
+is 
+composed of five modules: HTTP Downloading, HTML 
+Parser, Morphological Analyzing, Emotion Tagging, 
+Emotion Computing. The framework of the model is 
+illustrated by Figure 1. In the following we will 
+introduce the flow of how the system works step by 
+step.  
+
+Internet 
+
+Blog URL 
+
+HTTP Downloading 
+
+Blog webpage 
+
+HTML Parser 
+
+NL Sentence 
+
+Analyzer Rules 
+
+Morphological 
+Analyzing 
+
+Word 
+
+Rule Database 
+
+Emotion Tagging 
+
+Emotion Dictionary 
+
+Emotion Category 
+
+Emotion Computing 
+(Method 1, 2) 
+
+Structure Rules 
+
+Emotion Result 
+
+Figure 1. Framework of the blog 
+emotion-recognizing system 
+
+Firstly, 
+the System will download 
+the blog 
+webpage through Internet according to the web address 
+(URL) of the blog which is inputted from keyboard. 
+Secondly, the HTML Parser module analyzes the 
+blog webpage that has been downloaded, and extracts 
+each blog article in the webpage. Then it divides the 
+blog article into paragraphs and sentences which are 
+stored for further processing. 
+Next, for each natural language sentence, the 
+Morphological Analyzing module will analyze the 
+
+lexical characteristics of the sentence and extract words 
+from it based on the rule database according to analyzer 
+rules. Here we select the ICTCLAS (Institute of 
+Computing Technology, Chinese Lexical Analysis 
+System) system for this module for its high segment 
+accuracy in Chinese natural language. 
+And then in the Emotion Tagging module, Emotion 
+Dictionary is used to search for the emotion category of 
+a word. In our system, we only check words with 
+certain part of speech as keywords in the sentence. They 
+are the adjective, adverb, verb, idiom and habitual 
+words which are rich in emotions. Totally 7393 words 
+are included in the Emotion Dictionary, collecting from 
+People’s Daily tagging corpus and other dictionaries 
+such as Xiandaihanyu Dictionary. The output of the step 
+is the emotion category of each sentence. 
+Finally, with the emotion category of each sentence, 
+the Emotion Computing module will compute the 
+weight value of emotion categories of all sentences in a 
+blog article according to the blog structure rules, and 
+output the emotion result for the whole article. In our 
+system, we have tried two methods to realize this 
+module which will be analyzed in detail in the later part 
+of the paper. 
+
+5. Analysis of blog articles 
+
+From the emotion sensing of sentences to the 
+emotion recognition of an article, there is still a 
+complex way to go. With only the emotion category 
+based on the lexical information of words, the emotion 
+expressed by the whole article can not be assessed 
+correctly. In order to achieve the aim, the information of 
+structural characteristics [15] [16] of blog articles must 
+be acquired.  
+Here it is assumed that there exits a central 
+sentence which expresses the emotion of the whole 
+article, and the central sentence is likely to locate in a 
+certain place in the article with high probability. Then 
+we choose 40 most recent articles of two blog authors 
+with 20 articles for each. The blog authors are selected 
+randomly under the blog community in some university. 
+Next, we mark the central sentence expressing the 
+emotion of each article manually, and assess the 
+emotion into one of the 26 categories mentioned in 
+Section 3. Table 2 demonstrates the most probable 
+distributions of the central sentence throughout the 
+articles. Here are some abbreviated symbols used in the 
+table: 
+PCS: The paragraph where the central sentence is 
+located. 
+NTP: The number of total paragraphs. 
+LCS: The location of the central sentence. 
+NTS: The number of total sentences in PCS. 
+E: Emotion evaluated by human. 
+
+Authorized licensed use limited to: Saint Cloud State University. Downloaded on October 14,2020 at 14:58:31 UTC from IEEE Xplore.  Restrictions apply. 
+
+Table 2. The distribution of the central sentence  
+in blog articles 
+
+No. 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+9 
+10 
+11 
+12 
+13 
+14 
+15 
+16 
+17 
+18 
+19 
+20 
+21 
+22 
+23 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+31 
+32 
+33 
+34 
+35 
+36 
+37 
+38 
+39 
+40 
+
+PCS 
+7 
+
+NTP 
+7 
+
+4 
+
+4 
+1 
+
+5 
+6 
+6 
+7 
+8 
+2 
+1 
+
+7 
+
+9 
+1 
+6 
+
+4 
+1 
+5 
+
+1 
+2 
+15 
+1 
+
+3 
+
+1 
+17 
+
+4 
+
+8 
+4 
+
+5 
+8 
+6 
+7 
+8 
+7 
+2 
+
+7 
+
+10 
+9 
+9 
+
+6 
+6 
+6 
+
+8 
+4 
+15 
+11 
+
+5 
+
+11 
+18 
+
+LCS 
+1 
+title 
+title 
+title 
+3 
+title 
+1 
+4 
+title 
+6 
+2 
+3 
+3 
+1 
+1 
+1 
+title 
+title 
+1 
+title 
+1 
+1 
+2 
+title 
+title 
+2 
+1 
+1 
+title 
+1 
+1 
+1 
+1 
+
+1 
+title 
+title 
+1 
+1 
+title 
+
+NTS 
+1 
+
+3 
+
+4 
+4 
+
+6 
+2 
+3 
+4 
+1 
+9 
+3 
+
+1 
+
+1 
+2 
+2 
+
+2 
+1 
+2 
+
+2 
+2 
+1 
+1 
+
+1 
+
+1 
+1 
+
+E 
+angry 
+hateful 
+depressed 
+scornful 
+thankful 
+annoyed 
+depressed 
+depressed 
+annoyed 
+happy 
+praiseful 
+Neutral 
+thankful 
+happy 
+depressed 
+love 
+happy 
+annoyed 
+critical 
+depressed 
+depressed 
+happy 
+envious 
+sad 
+love 
+love 
+neutral 
+annoyed 
+annoyed 
+sad 
+happy 
+praiseful 
+depressed 
+Neutral 
+sad 
+regretful 
+love 
+depressed 
+annoyed 
+annoyed 
+
+Table 3. Structural weight values in blog articles 
+
+Central Sentence in 
+an Article 
+title 
+the last paragraph 
+the first paragraph 
+
+Number of 
+Occurrence 
+14 
+8 
+7 
+
+Weight 
+
+0.35 
+0.2 
+0.175 
+
+From the distribution of the central sentence in 
+Table 2, we obtain the structural weight values for a 
+blog article as showed in Table 3. We can see from 
+Table 2 that the central sentence which expresses the 
+emotion of the whole article tends to locate in three 
+places mainly: the title, the last paragraph, and the first 
+paragraph in a decreasing order of weight. 
+The central sentence also appears in other places 
+like the last second paragraph, the second paragraph, 
+and the last third paragraph, and etc. It is of more 
+probability for the central sentence to be in the 
+paragraphs near the two ends of an article than the 
+paragraphs near the middle. But there are no obvious 
+rules to follow for the occurrence in these places. 
+It can only be discovered that while the central 
+sentence is located in the last paragraph, the last 
+sentence in the paragraph is the central sentence in most 
+cases; and while the central sentence appears in the first 
+paragraph, the first sentence in the paragraph is usually 
+the central sentence. For other paragraphs, 
+last 
+sentences in last paragraphs are more important than the 
+ones from the beginning; and the sentences at the 
+beginning in first paragraphs are more important than 
+the ones from the end. 
+
+6. Basic idea of two methods 
+
+From the analysis of blog articles in Section 5, we 
+acquired the structural characteristics of blog articles. 
+Making use of the structural information, two different 
+methods are tried to compute the emotion in order to get 
+better results. The critical problem in the emotion 
+computing is how to find out the main emotion among 
+all the emotions extracted from all the paragraphs and 
+sentences in a blog article. 
+
+6.1. Method 1 
+
+The basic idea of Method 1 is to add all the 
+emotion weight values obtained from all the sentences, 
+and the emotion category with the biggest weight value 
+is the main emotion of a blog article.  
+Let us suppose that there are i (i=0,1,2,…n) 
+paragraphs in a blog article (here i=0 denotes the title of 
+the article) and j (j=1,2,3, …m) sentences in each 
+paragraph (m is variable for different paragraphs).  
+For each sentence j in each paragraph i, there is a 
+emotion weight value Wij assigned. When i=0, the 
+weight Wij is 0.35 as listed in Table 3. When i=1, it 
+denotes the first paragraph, and the weight Wij is 0.175. 
+When i=n, it denotes the last paragraph, and the weight 
+Wij is 0.2. For other paragraphs, the weight is averagely 
+assigned as (1-0.175-0.2) / (n-3).  
+Each sentence j in a paragraph i corresponds to a 
+pair (Ek, Wij). Ek is one of the 26 emotion categories 
+(k=1,2,…26). Ek with the maximum sum of all the 
+
+Authorized licensed use limited to: Saint Cloud State University. Downloaded on October 14,2020 at 14:58:31 UTC from IEEE Xplore.  Restrictions apply. 
+
+Table 4. The result of experiment-evaluation  
+on close test 
+
+No. 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+8 
+
+9 
+
+10 
+
+11 
+
+12 
+
+13 
+
+14 
+
+15 
+
+16 
+
+17 
+
+18 
+
+19 
+
+20 
+
+corresponding Wij (i=0,1,2,…n and j=1,2,3, …m) is the 
+emotion of the whole article. 
+
+6.2. Method 2 
+
+The basic idea of Method 2 is to try a direct way to 
+find out the main emotion of a blog article by searching 
+for the central sentence according to the proportion of 
+distribution in the article.  
+We check for the main emotion in the order of title, 
+the last paragraph, the first paragraph, the last second 
+paragraph, the first second paragraph and so on. This is 
+for the reason analyzed in Section 5 that the central 
+sentence tends to appear in the paragraphs near the two 
+ends of an article than the paragraphs near the middle. 
+For last paragraphs, the searching is from the end of the 
+paragraph to the beginning. For the first paragraphs, the 
+searching order is from the beginning to the end.  
+Once the emotion which appears first is extracted 
+in the searching, it is the main emotion of a blog article. 
+The emotion weight for each paragraph is the same as in 
+Method 1. 
+
+7. Experiments and evaluation 
+
+It is still an issue for the evaluation. By now there 
+is not a good evaluation method generally accepted. 
+Since different people may have different opinions even 
+on the same text, it is common for them to give different 
+evaluations of emotion manually. In our experiments, 
+we carried on the close test and open test based on the 
+manual evaluation of emotions as a standard set which 
+is judged by evaluators in advance. 
+
+7.1. Close test 
+
+The close test is carried out on 40 blog articles of 
+two blog authors which are used to obtain the structural 
+characteristics in Section 5. Two algorithms (Method 1 
+and 2) of emotion computing are realized in our system. 
+And the evaluation is to count the number of correct 
+prediction by the system compared with the standard set. 
+Table 4 gives a list of all the evaluation results on the 
+close test. The data in the table with the background of 
+grey color is the incorrect prediction of emotion 
+according to the standard set. And the percentages of 
+correct prediction by two methods are listed in Table 5 
+respectively. Here are some abbreviated symbols used 
+in Table 4: 
+E: Emotion evaluated by human. 
+ME 1: The machine emotion evaluated by the Blog 
+Emotion-Recognizing System using Method 1. 
+ME 2: The machine emotion evaluated by the Blog 
+Emotion-Recognizing System using Method 2. 
+
+E 
+
+angry 
+
+hateful 
+
+depressed 
+
+scornful 
+
+thankful 
+
+annoyed 
+
+depressed 
+
+depressed 
+
+annoyed 
+
+happy 
+
+praiseful 
+
+Neutral 
+
+thankful 
+
+happy 
+
+depressed 
+
+love 
+
+happy 
+
+annoyed 
+
+critical 
+
+depressed 
+
+21 
+
+depressed 
+
+22 
+
+23 
+24 
+
+25 
+
+26 
+
+27 
+
+28 
+
+29 
+30 
+31 
+
+32 
+
+33 
+
+happy 
+
+envious 
+sad 
+
+love 
+
+love 
+
+neutral 
+
+annoyed 
+
+annoyed 
+sad 
+happy 
+
+praiseful 
+
+depressed 
+
+ME 1 
+angry,0.2; grievance,0.175; 
+love,0.138 
+hateful,0.931; 
+critical,0.175; sad,0.069 
+depressed,0.868; 
+sad,0.136; happy,0.039 
+scornful,0.35; 
+praiseful,0.061 
+love,0.513; thankful,0.375; 
+praiseful,0.138 
+annoyed,0.725; 
+praiseful,0.275; love,0.267 
+depressed,0.091; 
+happy,0.046 
+depressed,0.45; 
+praiseful,0.175 
+annoyed,0.35; sad,0.11; 
+impatient,0.11 
+praiseful,0.267; 
+happy,0.183 
+praiseful,0.138; 
+regretful,0.091; 
+happy,0.045 
+sad,0.069; love,0.069; 
+expectant,0.069 
+thankful,0.2; happy,0.055; 
+sad,0.055 
+happy,0.246; angry,0.046; 
+love,0.046 
+depressed,0.206; 
+regretful,0.175; sad,0.138 
+neutral,0 
+happy,0.908;praiseful,0.09
+2 impatient,0.092 
+annoyed,0.35 
+critical,0.375; sad,0.138; 
+angry,0.138 
+depressed,0.745; 
+praiseful,0.65; sad,0.11 
+fearful,0.034; 
+depressed,0.034; 
+haughty,0.034 
+happy,0.175; sad,0.118; 
+praiseful,0.039 
+envious,0.039 
+sad,0.2 
+love,0.455; angry,0.055; 
+hateful,0.055 
+love,0.206;depressed,0.131 
+happy,0.069 
+sad,0.069; praiseful,0.069 
+annoyed, 0.069 
+
+annoyed,0.525 
+sad,0.221; envious,0.045 
+happy,0.313 
+praiseful,0.29; 
+depressed,0.175 
+depressed,0.375; love,0.2; 
+fearful,0.91 
+
+ME 2 
+angry,0.2 
+
+hateful,0.35 
+
+depressed, 
+0.35 
+scornful,0.35 
+
+thankful,0.2 
+
+annoyed, 0.35 
+
+happy,0.046 
+
+praiseful, 
+0.175 
+annoyed,0.35 
+
+praiseful, 
+0.175 
+praiseful, 
+0.046 
+
+expectant, 
+0.069 
+thankful,0.2 
+
+happy,0.2 
+
+regretful, 
+0.175 
+neutral,0 
+happy,0.2 
+
+annoyed,0.35 
+critical,0.2 
+
+depressed, 
+0.35 
+depressed, 
+0.034 
+
+happy,0.175 
+
+envious,0.039 
+sad,0.2 
+love,0.2 
+
+depressed,0.2 
+
+sad,0.069 
+annoyed, 
+0.069 
+annoyed,0.35 
+sad,0.175 
+happy,0.175 
+praiseful,0.2 
+
+love,0.2 
+
+Authorized licensed use limited to: Saint Cloud State University. Downloaded on October 14,2020 at 14:58:31 UTC from IEEE Xplore.  Restrictions apply. 
+
+34 
+
+Neutral 
+
+praiseful,0.175; 
+surprised,0.138 
+sad, 0.275 
+regretful,0.35 
+love,0.405; happy,0.2; 
+depressed,0.175 
+depressed,0.206; 
+sad,0.061; disgusted,0.061 
+annoyed,0.037; sad,0.018; 
+depressed,0.018 
+annoyed,0.35 
+
+praiseful, 
+0.175 
+sad,0.275 
+regretful,0.35 
+love,0.35 
+
+35 
+36 
+
+sad 
+regretful 
+
+37 
+
+love 
+
+38 
+
+depressed 
+
+depressed, 
+0.175 
+annoyed,0.02 
+
+39 
+
+annoyed 
+
+40 
+
+annoyed 
+
+annoyed,0.35 
+
+Table 5. The percentage of the close test 
+
+Method 
+
+Number of 
+Incorrect 
+Prediction 
+5 
+9 
+
+Number of 
+Correct 
+Prediction 
+35 
+31 
+
+Percentage of 
+Correct 
+Prediction (%) 
+87.5 
+77.5 
+
+1 
+2 
+
+7.2. Open test 
+
+The open test is carried out on 40 articles of other 
+blog authors (different from the two blog authors in the 
+close test). These blog articles are new ones that are not 
+used in acquiring the structure information. Similarly, 
+two methods of emotion computing are tried in the test 
+in the same way as in the close test. Table 6 
+demonstrates all the evaluation results. The data in the 
+table with the background of grey color is the incorrect 
+prediction of emotion according to the standard set. And 
+the percentages of correct prediction by two methods 
+are listed in Table 7 respectively. 
+
+Table 6. The result of experiment-evaluation  
+on open test 
+
+No. 
+
+E 
+respectful 
+
+ME 1 
+respectful,0.2; 
+critical,0.092; love,0.031 
+critical,1.55; happy,0.55; 
+regretful,0.2 
+critical,0.183; 
+disgusted,0.046; 
+praiseful,0.046 
+critical,0.115; 
+praiseful,0.023 
+annoyed,0.2;praiseful,0.09
+1 happy,0.061 
+angry,0.421;disgusted,0.91; 
+praiseful,0.045 
+depressed Neutral,0 
+critical 
+critical,0.35; sad,0.039 
+praiseful 
+praiseful,0.157 
+
+ME 2 
+respectful,0.2 
+
+1 
+
+2 
+
+critical 
+
+happy,0.35 
+
+3 
+
+critical 
+
+critical,0.046 
+
+4 
+
+critical 
+
+critical,0.023 
+
+5 
+
+annoyed 
+
+annoyed,0.2 
+
+6 
+7 
+8 
+
+angry 
+
+angry,0.2 
+
+Neutral,0 
+critical,0.35 
+praiseful, 
+0.039 
+annoyed,0.35 
+happy,0.35 
+surprised,0.35 
+
+9 
+
+10 
+11 
+
+annoyed 
+expectant 
+surprised 
+
+annoyed,0.35; happy,0.031 
+happy,1.675 
+surprised,0.35; 
+praiseful,0.35;love,0.138 
+happy,0.275; love,0,275; 
+expectant,0.2 
+
+12 
+
+13 
+
+happy 
+
+expectant,0.2 
+
+14 
+
+love 
+
+angry,0.372; 
+praiseful,0.269; 
+love,0.234 
+love,0.275; Sad,0.075; 
+praiseful,0.025 
+thankful,0.2; happy,0.092; 
+sad,0.092 
+love,0.469; happy,0.338; 
+sad,0.2 
+happy,0.338; praiseful,0.2; 
+annoyed,0.092 
+love,0.338; expectant,0.2; 
+sad,0.175 
+praiseful,0.425; love,0.05 
+sad,0.338; critical,0.175; 
+depressed,0.175 
+praiseful,0.556; 
+expectant,0.2; happy,0.069 
+sad,0.55; praiseful,0.037; 
+happy,0.2 
+expectant,0.338 
+sad,0.275; love,0.23; 
+expectant,0.2 
+happy,0.888; love,0.313; 
+sad,0.2 
+love,0.22; expectant,0.175; 
+thankful,0.175 
+praiseful,1.244; 
+critical,0.068 
+happy,1.063; 
+praiseful,0.35; 
+annoyed,0.138 
+critical,0.525;hateful,0.175
+; praiseful,0.13 
+love,0.405; disgusted,0.2; 
+critical,0.055 
+love,0.313; expectant,0.2; 
+praiseful,0.2 
+love,0.55; sad,0.092; 
+angry,0.092 
+love,0.22; sad,0.055; 
+disgusted,0.055 
+expectant,0.2; 
+praiseful,0.175;happy,0.11
+8 
+happy,0.429; paiseful,0.039 
+critical,0.039 
+love,0.75; sad,0.413; 
+praiseful,0.338 
+expectant,0.456;  
+praiseful,0.413; sad,0.206 
+happy,0.533; love,0.2; 
+critical,0.175 
+love,0.279; angry,0.039 
+
+love,0.2 
+
+15 
+
+love 
+
+love,0.2 
+
+16 
+
+thankful 
+
+thankful,0.2 
+
+17 
+
+love 
+
+love,0.2 
+
+18 
+
+happy 
+
+happy,0.2 
+
+19 
+
+love 
+
+expectant,0.2 
+
+20 
+
+praiseful 
+sad 
+
+praiseful,0.35 
+sad,0.2 
+
+21 
+
+22 
+
+expectant 
+
+praiseful,0.35 
+
+23 
+
+sad 
+
+sad,0.35 
+
+24 
+
+expectant 
+sad 
+
+annoyed,0.2 
+expectant,0.2 
+
+25 
+
+26 
+
+happy 
+
+happy,0.35 
+
+27 
+
+expectant 
+
+praiseful,0.2 
+
+28 
+
+expectant 
+
+praiseful,0.2 
+
+29 
+
+expectant 
+
+happy,0.35 
+
+30 
+
+critical 
+
+critical,0.35 
+
+31 
+
+love 
+
+love,0.35 
+
+32 
+
+love 
+
+praiseful,0.2 
+
+33 
+
+love 
+
+love,0.069 
+
+34 
+
+love 
+
+love,0.175 
+
+35 
+
+expectant 
+
+expectant,0.2 
+
+36 
+
+happy 
+
+happy,0.35 
+
+37 
+
+love 
+
+love,0.35 
+
+38 
+
+expectant 
+
+expectant,0.3
+5 
+happy,0.35 
+
+39 
+
+happy 
+
+40 
+
+love 
+
+love,0.2 
+
+Table 7. The percentage of the open test 
+
+Method 
+
+Number of 
+Incorrect 
+Prediction 
+7 
+12 
+
+Number of 
+Correct 
+Prediction 
+33 
+28 
+
+Percentage of 
+Correct 
+Prediction (%) 
+82.5 
+70 
+
+1 
+2 
+
+Authorized licensed use limited to: Saint Cloud State University. Downloaded on October 14,2020 at 14:58:31 UTC from IEEE Xplore.  Restrictions apply. 
+
+7.3. Comparison and discussion 
+
+In comparing the two methods for extracting 
+emotion from a blog article, we can see that Method 1 
+achieves a better performance than Method 2. However, 
+Method 1 spends much more time than Method 2 doing 
+the emotion computing. As shown in Figure 2, the solid 
+line denoting emotion prediction of Method 1 
+demonstrates more richness and accuracy in emotion 
+description than the dot-dash line denoting that of 
+Method 2. The data used in Figure 2 come from the first 
+10 articles of one blog author in Table 4. 
+The visual image of the emotion changes for 10 
+days can be easily obtained from Figure 2. If teachers or 
+psychological consultants have the emotion graph 
+everyday, they can monitor the mental situations of 
+college students and intervene to prevent the depression 
+in time. 
+
+Figure 2. Comparison of two methods of  
+emotion computing 
+
+By analyzing the incorrect predictions of emotion, 
+we can see that for both of the two methods, there exit 
+some articles in which the emotion of the central 
+sentences can not be sensed for the lack of vocabularies 
+in the emotion dictionary or the lack of the syntax 
+information. 
+For Method 1, the cases of incorrect prediction are: 
+When the weight value of some emotion category 
+(different from the emotion of the central sentence) 
+becomes the biggest after added throughout the whole 
+article, this emotion category will be the emotion of the 
+article. However, since Method 2 detects the emotion 
+according to the importance of paragraphs, in some 
+cases it gives the correct answer directly and quickly. 
+When 
+the weight values of several emotion 
+categories appear to be the same, Method 1 can not 
+predict the emotion of the article correctly. 
+For Method 2, the cases of incorrect prediction are: 
+Because the searching order in Method 2 is fixed, 
+the emotion first met in the article is probably not the 
+emotion of the central sentence. 
+When 
+the manual evaluation of emotion 
+
+is 
+
+“neutral”, Method 2 can only examine one of all the 
+emotions throughout the whole article as the emotion of 
+the article, while Method 1 can examine all the 
+emotions throughout the whole article instead of a 
+simple “neutral”. 
+In the experiments for testing, we choose 40 
+articles of two blog authors for close test and 40 articles 
+of other blog authors for open test. The result has 
+demonstrated that the methods used in our system are 
+reasonable, and the integration of the two methods may 
+achieve a better performance. 
+
+8. Conclusions and future work 
+
+Recently, the number of college students who 
+suicide themselves has been increasing with amazing 
+speed in the world. The problem of mental health 
+among college students has raised greater attention from 
+a 
+lot of people 
+in many professions. With 
+the 
+popularization of internet and the development of 
+information processing technologies, more and more 
+people have established their own blog websites. It will 
+be convenient for teachers or psychological consultants 
+to monitor the affective information expressed in blog 
+articles in order to prevent the depression of students. 
+The advances in Affective Computing and Natural 
+Language Processing enable the emotion recognition 
+from blog articles automatically.  
+In this paper, we have outlined the approach to 
+develop a Blog Emotion-Recognizing System. Firstly 
+we decided 
+the classification of emotions, and 
+introduced the model of the System. Based on the 
+lexical contents of words and structural characteristics 
+of blog articles, two methods have been proposed for 
+emotion computing. The experiments for testing have 
+been carried out, and the results for the two methods 
+were analyzed and discussed. The approach was proved 
+to be feasible and pointed out the future’s direction of 
+the research. 
+From 
+the 
+comparison 
+and discussion of 
+experimental results, we find that some parts need to be 
+improved in the future: 
+The first task to improve the emotion dictionary by 
+expanding the vocabularies and arranging them better, 
+for it plays a very important role in the emotion sensing. 
+Since different people have different styles in 
+writing blog articles, in the future we will choose more 
+blog articles of different authors for the algorithm 
+analysis and system test, which are supposed to achieve 
+a better performance. 
+
+Acknowledgements 
+
+We would like to thank Motoyuki Suzuki, Seiji 
+Tsuchiya, Kazuyuki Matsumoto, Li Yun, Teng Zhi, 
+Yuan Caixia and Mohammad Golam Sohrab for their 
+
+Authorized licensed use limited to: Saint Cloud State University. Downloaded on October 14,2020 at 14:58:31 UTC from IEEE Xplore.  Restrictions apply. 
+
+valuable advices while doing the experiments. This 
+research has been partially supported by the Ministry of 
+Education, Science, Sports and Culture, Grant-in-Aid 
+for Scientific Research (B), 19300029. 
+
+References 
+
+[1] James, R. K., & Gilliland B. E., “Crisis 
+Intervention Strategies (5th Edition)”, Brooks/Cole, 
+2005. 
+[2] R. W. Picard, “Affective Computing”, The MIT 
+Press, Mass., 1997. 
+[3] P. W. Picard, E. Vyzas, J. Healey, “Toward 
+Machine 
+Emotional 
+Intelligence”, 
+IEEE 
+Transactions on Pattern Analysis and Machine 
+Intelligence, Vol. 23, No.10, pp. 1175-1191, 
+October 2001. 
+[4] P. Pani, N. Sarkar, J. Adams, “Anxiety-based 
+affective 
+communication 
+for 
+implicit 
+human-machine 
+interaction”, 
+Advanced 
+Engineering Informatics 21 (3), pp. 323-334, July 
+2007. 
+[5] D. Kulic, E. A Croft, “Affective state estimation 
+for human-robot interaction”, IEEE Transactions 
+on Robotics 23 (5), pp. 991-1000, Oct. 2007. 
+[6] N. Fragopanagos, 
+J.G. Taylor, 
+“Emotion 
+recognition 
+in human–computer 
+interaction”, 
+Neural Networks, vol. 18, pp. 389–405, 2005. 
+[7] P. Jiang, H. Xiang, F. J. Ren, S. Kuroiwa, “An 
+Advanced Mental State Transtion Network and 
+Psychological Experiments”, Lecture Notes in 
+Computer Science, Vol. 3824, pp.1026-1035, 
+Springer-Verlag GmbH, 2005. 
+[8] H. Liu, H. Lieberman, T. Selker, ”A Model of 
+Textual Affect Sensing 
+using Real-world 
+Knowledge”, 
+Proceedings 
+of 
+the 
+2003 
+International Conference on 
+Intelligent User 
+
+Interfaces, IUI 2003, January 12-15, 2003. ACM 
+2003, ISBN 1-58113-586-6, pp. 125-132. Miami, 
+Florida, USA. 
+[9] F. J. Ren, “Recognizing Human Emotion and 
+Creating Machine Emotion”, 
+Invited Paper, 
+Information, Vol.8, No.1, pp.7-20, 2005. 
+[10] K. Matsumoto, J. Minato, F. J. Ren, S. 
+Kuroiwa ， ”Estimating Human Emotions Using 
+Wording and Sentence Patterns”, Proceedings of 
+the 2005 IEEE International Conference on 
+Information Acquisition, pp. 421-426, 2005.  
+[11] Z. Teng, F. J. Ren, S. Kuroiwa, “Recognition of 
+Emotion with SVMs”, International Journal of 
+Innovative Computing, Information and Control, 
+pp. 701 – 710, 2006. 
+[12] Y. Zhang, Z. M. Li, F. 
+J. Ren, S. 
+Kuroiwa，”Semi-automatic Emotion Recognition 
+from Textual Input Based on the Constructed 
+Emotion Thesaurus”, Proceeding of NLP-KE’05, 
+pp. 571-576, 2005.  
+[13] P. Ekman, W. V. Friesen, P. Elsworth, “Emotion 
+in the Human Face”, Cambridge University Press, 
+London, 1982. 
+[14] X. Y. Xu, J. H. Tao, “Emotion Dividing in 
+Chinese Emotion System”, 
+the 1st Chinese 
+Conference 
+on Affective Computing 
+and 
+Intelligent 
+Interaction(ACII’03), pp. 199-205, 
+Beijing, China, December, 2003, 
+[15] F. J. Ren, “Automatic Abstracting Important 
+Sentences”, International Journal of Information 
+Technology & Decision Making, Vol. 4, No. 1, pp. 
+141-152, 2005. 
+[16] K. Zechner, “Fast generation of abstracts from 
+general domain text corpora by extracting relevant 
+sentences”, Proceeding of 16th COLING, pp. 
+986-989, 1996.
+
+Authorized licensed use limited to: Saint Cloud State University. Downloaded on October 14,2020 at 14:58:31 UTC from IEEE Xplore.  Restrictions apply. 
+
