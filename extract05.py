@@ -205,7 +205,7 @@ def get_pages (pdf_doc, pdf_pwd='', images_folder='/tmp'):
     """Process each of the pages in this pdf file and return a list of strings representing the text found in each page"""
     return with_pdf(pdf_doc, _parse_pages, pdf_pwd, *tuple([images_folder]))
 
-a = open('a.txt','a')
+a = open('trans01/a.txt', 'a')
 for i in get_pages('C:\002\pdf\E.pdf'):
     a.write(i)
 a.close()
